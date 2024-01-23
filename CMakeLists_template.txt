@@ -50,7 +50,6 @@ endif ()
 
 include_directories(
 ${includes}
-Tasks
 UOSM-Core/Inc
 UOSM-Core/Drivers
 UOSM-Core/Modules
@@ -59,7 +58,7 @@ UOSM-Core/Utils
 
 add_definitions(${defines})
 
-file(GLOB_RECURSE SOURCES ${sources} "Tasks/*.*" "UOSM-Core/*.*" )
+file(GLOB_RECURSE SOURCES ${sources} "UOSM-Core/*.*" )
 
 set(LINKER_SCRIPT $${CMAKE_SOURCE_DIR}/${linkerScript})
 
