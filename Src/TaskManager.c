@@ -11,10 +11,10 @@ _Noreturn void RunTaskManager(void){
 
     MCP2515_CS_HIGH();
 
-//    IComms_Init();
+    IComms_Init();
 
     while(1) {
-//        IComms_PeriodicReceive();
+        IComms_PeriodicReceive();
 
         // TODO: Actuate Lights based off of state in LightsDriver
     }
