@@ -58,7 +58,7 @@ UOSM-Core/Utils
 
 add_definitions(${defines})
 
-file(GLOB_RECURSE SOURCES ${sources} "UOSM-Core/*.*" )
+file(GLOB_RECURSE SOURCES ${sources} "Src/*.*" "UOSM-Core/*.*" )
 
 set(LINKER_SCRIPT $${CMAKE_SOURCE_DIR}/${linkerScript})
 
