@@ -10,13 +10,12 @@
 
 _Noreturn void RunTaskManager(void){
 
-    SerialPrintln("RTXS");
+    SerialPrintln("Test");
 
     MCP2515_CS_HIGH();
 
-
-//    IComms_Init();
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+    IComms_Init();
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
 
@@ -26,12 +25,17 @@ _Noreturn void RunTaskManager(void){
 
     SerialPrintln("RTXE");
 
-    //Try to generate a PWM output.
+    //TODO: Try to generate a PWM output.
+
 
     while(1) {
-//        IComms_PeriodicReceive();
+        IComms_PeriodicReceive();
         // TODO: Actuate Lights based off of state in LightsDriver
-
+        HAL_Delay(200);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+        HAL_Delay(200);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+        SerialPrintln("Test");
     }
 
 }
