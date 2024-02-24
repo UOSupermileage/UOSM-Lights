@@ -35,7 +35,6 @@ _Noreturn void RunTaskManager(void){
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
         HAL_Delay(200);
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-        SerialPrintln("Test");
     }
 
 }
