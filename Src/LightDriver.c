@@ -16,4 +16,12 @@ static volatile brightness_t low_beam_lights;
 
 static volatile ms_t turning_lights_frequency;
 //States
-lights_status_t lights_status;
+static lights_status_t lights_status;
+
+flag_status_t getLeftTurnStatus(){
+    return lights_status.left_turn_enabled;
+}
+
+void setLeftTurnStatus(flag_status_t state){
+
+}

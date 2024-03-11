@@ -61,7 +61,9 @@ add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F030x6 -DDEBUG -DUSE_HAL_DRIVER 
 
 file(GLOB_RECURSE SOURCES "Startup/*.*" "Src/*.*" "Drivers/*.*" "Startup/*.*" "Src/*.*" "Middlewares/*.*" "Drivers/*.*" "Src/*.*" "UOSM-Core/*.*" )
 
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F030F4PX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F030F4PX_FLASH.ld
+        Inc/pins.h
+        Inc/pins.h)
 
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 add_link_options(-mcpu=cortex-m0 -mthumb -mthumb-interwork)
