@@ -2,8 +2,9 @@
 // Created by louis on 2024-01-22.
 //
 
-#include "LightsDriver.h"
+//TODO: Hardware functions aliasing
 
+#include "LightsDriver.h"
 static volatile brightness_t running_lights_red;
 static volatile brightness_t running_lights_green;
 static volatile brightness_t running_lights_blue;
@@ -18,10 +19,10 @@ static volatile ms_t turning_lights_frequency;
 //States
 static lights_status_t lights_status;
 
-flag_status_t getLeftTurnStatus(){
-    return lights_status.left_turn_enabled;
+void setLightsStatus(uint32_t lights){
+    lights_status.all = lights;
 }
 
-void setLeftTurnStatus(flag_status_t state){
-
+flag_status_t getLeftTurnStatus(){
+    return lights_status.left_turn_enabled;
 }

@@ -26,7 +26,6 @@ _Noreturn void RunTaskManager(void){
         }else{
             HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_RESET);
         }
-
     }
 
 }

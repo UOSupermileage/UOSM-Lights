@@ -4,6 +4,7 @@
 //#include "DataAggregation.h"
 #include "InternalCommsModule.h"
 #include "CANDriver.h"
+#include "LightsDriver.h"
 
 void ErrorDataCallback(iCommsMessage_t *msg) {
     DebugPrint("ErrorDataCallback! %d", msg->standardMessageID);
@@ -34,3 +35,7 @@ void SpeedDataCallback(iCommsMessage_t *msg) {
 void ThrottleDataCallback(iCommsMessage_t *msg) { DebugPrint("ThrottleDataCallback not implemented! %d", msg->standardMessageID); }
 void PressureDataCallback(iCommsMessage_t *msg) { DebugPrint("SpeedDataCallback not implemented! %d", msg->standardMessageID); }
 void TemperatureDataCallback(iCommsMessage_t *msg) { DebugPrint("SpeedDataCallback not implemented! %d", msg->standardMessageID); }
+void LightsDataCallback(iCommsMessage_t *msg){
+    uint32_t message = readMsg(msg);
+    setLightsStatus(message);
+}

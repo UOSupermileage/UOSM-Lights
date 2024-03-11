@@ -9,7 +9,8 @@
 
 // TODO: Create getters and setters to access data
 flag_status_t getLeftTurnStatus();
-void setLeftTurnStatus();
+void setLeftTurnStatus(flag_status_t status);
+void setLightsStatus(uint32_t lights);
 
 
 #endif //UOSM_LIGHTS_LIGHTSDRIVER_H
