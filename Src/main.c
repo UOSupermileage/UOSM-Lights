@@ -101,7 +101,6 @@ int main(void)
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
 
-    HAL_TIM_PWM_Start(&htim14, TIM_CHANNEL_1);
     RunTaskManager();
 
   /* USER CODE END 2 */

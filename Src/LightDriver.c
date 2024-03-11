@@ -15,5 +15,5 @@ static volatile brightness_t high_beam_lights;
 static volatile brightness_t low_beam_lights;
 
 static volatile ms_t turning_lights_frequency;
-
-uint8_t hazards_enabled; // bool (on or off)
+//States
+lights_status_t lights_status;
