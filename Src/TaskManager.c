@@ -20,7 +20,7 @@ _Noreturn void RunTaskManager(void){
     while(1) {
         IComms_PeriodicReceive();
         // TODO: Actuate Lights based off of state in LightsDriver
-        if(getLeftTurnStatus()) {
+        if(getLeftTurnStatus() == Set) {
             //Do nothing
             HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_SET);
         }else{
