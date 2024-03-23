@@ -9,7 +9,8 @@
 
 // TODO: Create getters and setters to access data
 flag_status_t getLeftTurnStatus();
-void setLeftTurnStatus(flag_status_t status);
+flag_status_t getRightTurnStatus();
+//void setLeftTurnStatus(flag_status_t status);
 void setLightsStatus(uint32_t lights);
 
 

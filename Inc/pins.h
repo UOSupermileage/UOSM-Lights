@@ -4,7 +4,8 @@
 
 #ifndef UOSM_LIGHTS_PINS_H
 #define UOSM_LIGHTS_PINS_H
-#define FRONT_LIGHTS
+//#define FRONT_LIGHTS
+#define BRUCE_FRONT_LIGHTS
 #ifdef FRONT_LIGHTS
 #define RunningLightsR_port GPIOA
 #define RunningLightsR_pin GPIO_PIN_2
@@ -16,9 +17,18 @@
 #define LeftTurn_pin GPIO_PIN_13
 #endif
 #ifdef REAR_LIGHTS
-#define
 #endif
-#endif //UOSM_LIGHTS_PINS_H
+#ifdef BRUCE_FRONT_LIGHTS
+#define Headlights1_port GPIOA
+#define Headlights1_pin GPIO_PIN_14
+#define LeftTurn_port GPIOA
+#define LeftTurn_pin GPIO_PIN_13
+#define RightTurn_port GPIOA
+#define RightTurn_pin GPIO_PIN_2
+#endif
+#ifdef BRUCE_REAR_LIGHTS
+#endif
+#endif //UOSM_LIGHTS_  PINS_H
 //RunningLightsR PA2
 //RunningLightsR PA2
 //HeadlightsLow PA13 - low beams

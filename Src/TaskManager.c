@@ -27,6 +27,12 @@ _Noreturn void RunTaskManager(void){
         }else{
             HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_RESET);
         }
+        if(getRightTurnStatus()==Set){
+            HAL_GPIO_WritePin(RightTurn_port,RightTurn_pin,GPIO_PIN_SET);
+            DebugPrint("Turning right");
+        }else{
+            HAL_GPIO_WritePin(RightTurn_port,RightTurn_pin,GPIO_PIN_RESET);
+        }
     }
 
 }

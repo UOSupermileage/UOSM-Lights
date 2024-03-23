@@ -26,3 +26,6 @@ void setLightsStatus(uint32_t lights){
 flag_status_t getLeftTurnStatus(){
     return lights_status.left_turn_enabled;
 }
+flag_status_t getRightTurnStatus(){
+    return lights_status.right_turn_enabled;
+}
