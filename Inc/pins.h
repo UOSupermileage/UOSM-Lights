@@ -20,7 +20,9 @@
 #endif
 #ifdef BRUCE_FRONT_LIGHTS
 #define Headlights1_port GPIOA
-#define Headlights1_pin GPIO_PIN_14
+#define Headlights1_pin GPIO_PIN_1
+#define Headlights2_port GPIOA
+#define Headlights2_pin GPIO_PIN_14
 #define LeftTurn_port GPIOA
 #define LeftTurn_pin GPIO_PIN_13
 #define RightTurn_port GPIOA

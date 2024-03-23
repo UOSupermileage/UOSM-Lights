@@ -17,21 +17,49 @@ _Noreturn void RunTaskManager(void){
     //Initialize MCP
     MCP2515_CS_HIGH();
     IComms_Init();
+    flag_status_t blink;
+    uint32_t blink_delay = 1000; //Blink interval in milliseconds
+    HAL_GetTick();
+    uint32_t current_time = 0;
+    uint32_t previous_time = 0;
+    //Blink logic from: https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/
     while(1) {
         IComms_PeriodicReceive();
         // TODO: Actuate Lights based off of state in LightsDriver
-        if(getLeftTurnStatus() == Set) {
+        current_time = HAL_GetTick();
+        if(getLeftTurnStatus() == Set && blink == Set) {
             //Do nothing
             DebugPrint("Turning left");
-            HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_SET);
-        }else{
-            HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_RESET);
+            LeftTurnEnabled();
+        }else if (blink == Clear){
+            LeftTurnDisabled();
         }
-        if(getRightTurnStatus()==Set){
-            HAL_GPIO_WritePin(RightTurn_port,RightTurn_pin,GPIO_PIN_SET);
+        if(getRightTurnStatus()==Set && blink == Set){
+            RightTurnEnabled();
             DebugPrint("Turning right");
+        }else if(blink == Clear){
+            RightTurnDisabled();
+        }
+        if(getHazardsStatus() == Set && blink == Set){
+            DebugPrint("Hazards on!");
+            HazardsEnabled();
+        }else if(blink == Clear){
+            HazardsDisabled();
+        }
+        if(getHeadlightsStatus() == Set){
+            DebugPrint("Headlights on!");
+            HeadlightsEnabled();
         }else{
-            HAL_GPIO_WritePin(RightTurn_port,RightTurn_pin,GPIO_PIN_RESET);
+            HeadlightsDisabled();
+        }
+        //Update blink flag
+        if(current_time - previous_time >= blink_delay){
+            previous_time = current_time;
+            if(blink == Set){
+                blink = Clear;
+            } else{
+                blink = Set;
+            }
         }
     }
 

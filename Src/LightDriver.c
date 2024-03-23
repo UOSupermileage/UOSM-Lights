@@ -5,6 +5,7 @@
 //TODO: Hardware functions aliasing
 
 #include "LightsDriver.h"
+#include "pins.h"
 static volatile brightness_t running_lights_red;
 static volatile brightness_t running_lights_green;
 static volatile brightness_t running_lights_blue;
@@ -28,4 +29,38 @@ flag_status_t getLeftTurnStatus(){
 }
 flag_status_t getRightTurnStatus(){
     return lights_status.right_turn_enabled;
+}
+flag_status_t getHeadlightsStatus(){
+    return lights_status.headlights_enabled;
+}
+flag_status_t getHazardsStatus(){
+    return lights_status.hazards_enabled;
+}
+void LeftTurnEnabled(){
+    HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_SET);
+}
+void LeftTurnDisabled(){
+    HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_RESET);
+}
+void HazardsEnabled(){
+    HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, GPIO_PIN_SET);
+}
+void HazardsDisabled(){
+    HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, GPIO_PIN_RESET);
+}
+void RightTurnEnabled(){
+    HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, GPIO_PIN_SET);
+}
+void RightTurnDisabled(){
+    HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, GPIO_PIN_RESET);
+}
+void HeadlightsEnabled(){
+    HAL_GPIO_WritePin(Headlights1_port, Headlights1_pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(Headlights2_port, Headlights2_pin, GPIO_PIN_SET);
+}
+void HeadlightsDisabled(){
+    HAL_GPIO_WritePin(Headlights1_port, Headlights1_pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(Headlights2_port, Headlights2_pin, GPIO_PIN_RESET);
 }
