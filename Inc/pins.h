@@ -13,7 +13,7 @@
 #define HeadlightsHigh_port GPIOA
 #define HeadlightsHigh_pin GPIO_PIN_14
 #define LeftTurn_port GPIOA
-#define LeftTurn_pin GPIO_PIN_0
+#define LeftTurn_pin GPIO_PIN_13
 #endif
 #ifdef REAR_LIGHTS
 #define
@@ -25,3 +25,4 @@
 //HeadlightsHigh PA14 - high beams
 //LeftTurn PA0
 //TODO: Assign correct lights pins
+//

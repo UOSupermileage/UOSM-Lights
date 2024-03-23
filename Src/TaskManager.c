@@ -22,6 +22,7 @@ _Noreturn void RunTaskManager(void){
         // TODO: Actuate Lights based off of state in LightsDriver
         if(getLeftTurnStatus() == Set) {
             //Do nothing
+            DebugPrint("Turning left");
             HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_SET);
         }else{
             HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, GPIO_PIN_RESET);
