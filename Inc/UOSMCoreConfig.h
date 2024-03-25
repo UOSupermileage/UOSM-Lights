@@ -4,6 +4,7 @@
 #define UOSM_CORE_CONFIG
 
 #define STM
+#define SMALL_PRINTF
 
 #include "stm32f0xx_hal.h"
 
