@@ -17,7 +17,7 @@ void EventDataCallback(iCommsMessage_t *msg) {
         flag_status_t status = msg->data[0];
 
         DebugPrint("EventDataCallback, received code %d with status %d", code, status);
-        if(code == BREAKS_ENABLED) {
+        if(code == BRAKES_ENABLED) {
             setBrakesStatus(Set);
         }else{
             setBrakesStatus(Clear);
