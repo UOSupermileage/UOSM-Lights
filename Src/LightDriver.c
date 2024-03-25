@@ -41,7 +41,7 @@ flag_status_t getHazardsStatus(){
     return lights_status.hazards_enabled;
 }
 flag_status_t getBrakeLightsStatus(){
-
+    return brakes_status;
 }
 //Abstract functions over HAL
 void LeftTurnEnabled(){

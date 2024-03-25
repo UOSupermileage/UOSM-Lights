@@ -9,11 +9,13 @@
 #define BLINK_DELAY 600 //Will blink a bit less than once every half second.
 
 // TODO: Create getters and setters to access data
+//Getters
 flag_status_t getLeftTurnStatus();
 flag_status_t getRightTurnStatus();
 flag_status_t getHazardsStatus();
 flag_status_t getHeadlightsStatus();
-//void setLeftTurnStatus(flag_status_t status);
+flag_status_t getBrakeLightsStatus();
+//Setters
 void setLightsStatus(uint32_t lights);
 void setBrakesStatus(flag_status_t);
 //Functions for front lights

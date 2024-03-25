@@ -57,11 +57,11 @@ _Noreturn void RunTaskManager(void){
 #endif
 #ifdef BRUCE_REAR_LIGHTS
         RunningLightsEnabled();
-        if(getHeadlightsStatus() == Set){
-            DebugPrint("Headlights on!");
-            HeadlightsEnabled();
+        if(getBrakeLightsStatus() == Set){
+            DebugPrint("Brake lights on!");
+            BrakeLightsEnabled();
         }else{
-            HeadlightsDisabled();
+            BrakeLightsDisabled();
         }
 #endif
         //Update blink flag
