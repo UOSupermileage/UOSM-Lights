@@ -230,10 +230,12 @@ PUBLIC result_t IComms_ReadPairInt32Message(iCommsMessage_t* msg, int32_t* a, in
     return RESULT_OK;
 }
 
-PUBLIC iCommsMessage_t
-IComms_CreatePressureTemperatureMessage(uint16_t standardMessageID, pressure_t a, temperature_t b) {}
-
-PUBLIC result_t IComms_ReadPressureTemperatureMessage(iCommsMessage_t* msg, pressure_t* a, temperature_t* b);
+PUBLIC iCommsMessage_t IComms_CreatePressureTemperatureMessage(uint16_t standardMessageID, pressure_t a, temperature_t b) {
+    return IComms_CreatePairInt32Message(standardMessageID, a, b);
+}
+PUBLIC result_t IComms_ReadPressureTemperatureMessage(iCommsMessage_t* msg, pressure_t* a, temperature_t* b) {
+    return IComms_ReadPairInt32Message(msg, a, b);
+}
 
 PUBLIC uint16_pair_t readMsgPairUInt16Bit(iCommsMessage_t* msg) {
     uint16_pair_t pair = {};
@@ -245,7 +247,6 @@ PUBLIC uint16_pair_t readMsgPairUInt16Bit(iCommsMessage_t* msg) {
 
     pair.b = msg->data[3] << 8;
     pair.b |= msg->data[2];
-
     return pair;
 }
 
