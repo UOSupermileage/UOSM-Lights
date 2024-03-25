@@ -15,6 +15,7 @@ flag_status_t getHazardsStatus();
 flag_status_t getHeadlightsStatus();
 //void setLeftTurnStatus(flag_status_t status);
 void setLightsStatus(uint32_t lights);
+void setBrakesStatus();
 //Functions for front lights
 void LeftTurnEnabled();
 void LeftTurnDisabled();

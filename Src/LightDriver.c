@@ -19,9 +19,13 @@ static volatile brightness_t low_beam_lights;
 static volatile ms_t turning_lights_frequency;
 //States
 static lights_status_t lights_status;
+static flag_status_t brakes_status;
 //Global setter
 void setLightsStatus(uint32_t lights){
     lights_status.all = lights;
+}
+void setBrakesStatus(flag_status_t status){
+    brakes_status = status;
 }
 //Getters
 flag_status_t getLeftTurnStatus(){
@@ -37,7 +41,7 @@ flag_status_t getHazardsStatus(){
     return lights_status.hazards_enabled;
 }
 flag_status_t getBrakeLightsStatus(){
-    
+
 }
 //Abstract functions over HAL
 void LeftTurnEnabled(){

@@ -12,6 +12,19 @@ void ErrorDataCallback(iCommsMessage_t *msg) {
 
 void EventDataCallback(iCommsMessage_t *msg) {
     DebugPrint("EventDataCallback! %d", msg->standardMessageID);
+    if (msg->dataLength == CANMessageLookUpTable[EVENT_DATA_ID].numberOfBytes) {
+        EventCode code = msg->data[1];
+        flag_status_t status = msg->data[0];
+
+        DebugPrint("EventDataCallback, received code %d with status %d", code, status);
+        if(code == BREAKS_ENABLED) {
+            setBrakesStatus(Set);
+        }else{
+            setBrakesStatus(Clear);
+        }
+    } else {
+        DebugPrint("msg.dataLength does not match lookup table. %d != %d", msg->dataLength, CANMessageLookUpTable[ERROR_DATA_ID].numberOfBytes);
+    }
 }
 
 void MotorRPMDataCallback(iCommsMessage_t* msg) {
