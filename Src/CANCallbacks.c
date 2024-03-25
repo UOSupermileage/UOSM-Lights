@@ -39,5 +39,4 @@ void LightsDataCallback(iCommsMessage_t *msg){
     uint32_t message = readMsg(msg);
     setLightsStatus(message);
     SerialPrintln("Received lights message!");
-    SerialPrintln("Left turn status: %d",getLeftTurnStatus());
 }

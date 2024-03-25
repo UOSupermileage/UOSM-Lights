@@ -18,7 +18,7 @@ _Noreturn void RunTaskManager(void){
     MCP2515_CS_HIGH();
     IComms_Init();
     flag_status_t blink;
-    uint32_t blink_delay = 1000; //Blink interval in milliseconds
+    uint32_t blink_delay = BLINK_DELAY; //Blink interval in milliseconds
     HAL_GetTick();
     uint32_t current_time = 0;
     uint32_t previous_time = 0;
@@ -27,6 +27,7 @@ _Noreturn void RunTaskManager(void){
         IComms_PeriodicReceive();
         // TODO: Actuate Lights based off of state in LightsDriver
         current_time = HAL_GetTick();
+        //Code for front lights
         if(getLeftTurnStatus() == Set && blink == Set) {
             //Do nothing
             DebugPrint("Turning left");
@@ -46,12 +47,23 @@ _Noreturn void RunTaskManager(void){
         }else if(blink == Clear){
             HazardsDisabled();
         }
+#ifdef BRUCE_FRONT_LIGHTS
         if(getHeadlightsStatus() == Set){
             DebugPrint("Headlights on!");
             HeadlightsEnabled();
         }else{
             HeadlightsDisabled();
         }
+#endif
+#ifdef BRUCE_REAR_LIGHTS
+        RunningLightsEnabled();
+        if(getHeadlightsStatus() == Set){
+            DebugPrint("Headlights on!");
+            HeadlightsEnabled();
+        }else{
+            HeadlightsDisabled();
+        }
+#endif
         //Update blink flag
         if(current_time - previous_time >= blink_delay){
             previous_time = current_time;
