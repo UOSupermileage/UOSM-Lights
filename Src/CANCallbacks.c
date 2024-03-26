@@ -18,9 +18,9 @@ void EventDataCallback(iCommsMessage_t *msg) {
 
         DebugPrint("EventDataCallback, received code %d with status %d", code, status);
         if(code == BRAKES_ENABLED) {
-            setBrakesStatus(Set);
-        }else{
-            setBrakesStatus(Clear);
+            setBrakesStatus(status);
+
+            DebugPrint("Setting brakes: %d", status);
         }
     } else {
         DebugPrint("msg.dataLength does not match lookup table. %d != %d", msg->dataLength, CANMessageLookUpTable[ERROR_DATA_ID].numberOfBytes);
