@@ -62,7 +62,7 @@ _Noreturn void RunTaskManager(void){
             BrakeLightsEnabled();
         }else{
             BrakeLightsDisabled();
-            DebugPrint("Brake lights off!");
+            //DebugPrint("Brake lights off!");
         }
 #endif
         //Update blink flag
