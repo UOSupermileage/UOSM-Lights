@@ -23,6 +23,7 @@ _Noreturn void RunTaskManager(void){
     uint32_t current_time = 0;
     uint32_t previous_time = 0;
     //Blink logic from: https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/
+
     while(1) {
         IComms_PeriodicReceive();
         // TODO: Actuate Lights based off of state in LightsDriver

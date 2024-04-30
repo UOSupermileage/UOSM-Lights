@@ -844,11 +844,11 @@ int printf_(const char* format, ...)
 
 int sprintf_(char* buffer, const char* format, ...)
 {
-    va_list va;
+    /*va_list va;
     va_start(va, format);
     const int ret = _vsnprintf(_out_buffer, buffer, (size_t)-1, format, va);
     va_end(va);
-    return ret;
+    return ret;*/
 }
 
 
