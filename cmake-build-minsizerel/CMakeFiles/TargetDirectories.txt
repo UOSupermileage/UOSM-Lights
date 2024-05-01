@@ -1,0 +1,3 @@
+C:/Users/louis/CLionProjects/UOSM-Lights/cmake-build-minsizerel/CMakeFiles/UOSM-Lights.elf.dir
+C:/Users/louis/CLionProjects/UOSM-Lights/cmake-build-minsizerel/CMakeFiles/edit_cache.dir
+C:/Users/louis/CLionProjects/UOSM-Lights/cmake-build-minsizerel/CMakeFiles/rebuild_cache.dir
