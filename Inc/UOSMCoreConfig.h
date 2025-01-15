@@ -4,11 +4,12 @@
 #define UOSM_CORE_CONFIG
 
 #define STM
+#define SMALL_PRINTF
 
 #include "stm32f0xx_hal.h"
 
 #define DEBUG_UART              huart1
-#define MAX_SERIAL_PRINT_LENGTH 16
+#define MAX_SERIAL_PRINT_LENGTH 64
 
 #define EXT_SPI_CAN             hspi1
 #define SPI_CAN                 &hspi1
