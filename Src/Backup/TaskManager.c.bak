@@ -14,7 +14,6 @@ _Noreturn void RunTaskManager(void) {
     //Initialize MCP
     MCP2515_CS_HIGH();
     DebugPrint("Start!");
-    HAL_TIM_PWM_Start();
 
     // Initialize CAN
     IComms_Init();

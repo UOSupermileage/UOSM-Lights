@@ -9,12 +9,12 @@
 //#define BRUCE_FRONT_LIGHTS
 //#define BRUCE_REAR_LIGHTS
 #ifdef FRONT_LIGHTS
-#define FrontRunningR_port GPIOA
-#define FrontRunningR_pin GPIO_PIN_2
+#define FrontRunningLightsR_port GPIOA
+#define FrontRunningLightsR_pin GPIO_PIN_2
 #define FrontRunningG_port GPIOA
 #define FrontRunningG_pin GPIO_PIN_3
 #define FrontRunningB_port GPIOB
-#define FrontRunningB_pin GPIO_PIN_1
+#define FrontRunningB_pin GPIO_PIN_
 #define FrontHeadlightsLow_port GPIOA
 #define FrontHeadlightsLow_pin GPIO_PIN_13
 #define FrontHeadlightsHigh_port GPIOA

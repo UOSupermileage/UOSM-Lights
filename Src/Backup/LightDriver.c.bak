@@ -44,11 +44,7 @@ flag_status_t getHazardsStatus(){
     return HAL_GPIO_ReadPin(FrontLeftTurn_port, FrontLeftTurn_pin) == HAL_GPIO_ReadPin(FrontRightTurn_port, FrontRightTurn_pin) ? Set : Clear;
 }
 flag_status_t getBrakeLightsStatus(){
-    return HAL_GPIO_ReadPin(BrakeLights_port, BrakeLights_pin) == GPIO_PIN_SET ? Set : Clear;
-}
-
-int16_t getRed() {
-    return HAL_GPIO_ReadPin(FrontRunningR_port, FrontRunningR_pin) == GPIO_PIN_SET ? Set : Clear;
+    return HAL_GPIO_ReadPin(BrakeLights_port, BrakeLights_pin) == GPIO_PIN_SET ? SET : RESET;
 }
 
 //Abstract functions over HAL
@@ -86,8 +82,4 @@ void BrakeLightsEnabled(flag_status_t enabled){
 #ifdef REAR_LIGHTS
     HAL_GPIO_WritePin(BrakeLights_port, BrakeLights_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 #endif
-}
-
-void setRed(int16_t red) {
-
 }

@@ -16,7 +16,7 @@ extern "C" {
 
 #include "SerialDebugDriver.h"
 
-#define DebugPrint(...) //SerialPrintln(__VA_ARGS__) // Disabled to save memory
+#define DebugPrint(...) SerialPrintln(__VA_ARGS__) // Disabled to save memory
 
 #include <stdint.h>
 
