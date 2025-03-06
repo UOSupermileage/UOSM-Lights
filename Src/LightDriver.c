@@ -34,6 +34,10 @@ void setBrakesStatus(flag_status_t status){
 flag_status_t getLeftTurnStatus(){
     return HAL_GPIO_ReadPin(FrontLeftTurn_port, FrontLeftTurn_pin) == GPIO_PIN_SET ? Set : Clear;
 }
+
+flag_status_t getHighBeamLightsStatus() {
+    return HAL_GPIO_ReadPin(FrontHeadlightsHigh_port, FrontHeadlightsHigh_pin) == GPIO_PIN_SET ? Set : Clear;
+}
 flag_status_t getRightTurnStatus(){
     return  HAL_GPIO_ReadPin(FrontRightTurn_port, FrontRightTurn_pin) == GPIO_PIN_SET ? Set : Clear;
 }
@@ -47,8 +51,15 @@ flag_status_t getBrakeLightsStatus(){
     return HAL_GPIO_ReadPin(BrakeLights_port, BrakeLights_pin) == GPIO_PIN_SET ? Set : Clear;
 }
 
-int16_t getRed() {
+flag_status_t getRed() {
     return HAL_GPIO_ReadPin(FrontRunningR_port, FrontRunningR_pin) == GPIO_PIN_SET ? Set : Clear;
+}
+
+flag_status_t getGreen() {
+    return HAL_GPIO_ReadPin(FrontRunningG_port, FrontRunningG_pin) == GPIO_PIN_SET ? Set : Clear;
+}
+flag_status_t getBlue() {
+    return HAL_GPIO_ReadPin(FrontRunningB_port, FrontRunningB_pin) == GPIO_PIN_SET ? Set : Clear;
 }
 
 //Abstract functions over HAL
@@ -69,7 +80,12 @@ void setRightTurn(flag_status_t enabled) {
     HAL_GPIO_WritePin(FrontRightTurn_port, FrontRightTurn_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
-void setHeadlights(flag_status_t enabled) {
+void setHighBeams(flag_status_t enabled) {
+    DebugPrint("Highbeams");
+    HAL_GPIO_WritePin(FrontHeadlightsHigh_port, FrontHeadlightsHigh_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
+}
+
+void setLow(flag_status_t enabled) {
 #ifdef FRONT_LIGHTS
 
     DebugPrint("Set");
@@ -88,6 +104,16 @@ void BrakeLightsEnabled(flag_status_t enabled){
 #endif
 }
 
-void setRed(int16_t red) {
 
+
+void setRed(flag_status_t red) {
+    HAL_GPIO_WritePin(FrontRunningR_port, FrontRunningR_pin, red ? GPIO_PIN_RESET : GPIO_PIN_SET);
+}
+
+void setGreen(flag_status_t green) {
+    HAL_GPIO_WritePin(FrontRunningG_port, FrontRunningG_pin, green ? GPIO_PIN_RESET : GPIO_PIN_SET);
+}
+
+void setBlue(flag_status_t blue) {
+    HAL_GPIO_WritePin(FrontRunningB_port, FrontRunningB_pin, blue ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
