@@ -5,6 +5,9 @@
 //
 
 #include "TaskManager.h"
+
+#include <BlinkTask.h>
+
 #include "UOSMCoreConfig.h"
 #include "InternalCommsModule.h"
 #include "LightsDriver.h"
@@ -19,7 +22,7 @@ _Noreturn void RunTaskManager(void) {
     // Initialize CAN
     IComms_Init();
 
-    flag_status_t blink;
+    flag_status_t blink = 0;
     uint32_t blink_delay = BLINK_DELAY; //Blink interval in milliseconds
     uint32_t current_time = HAL_GetTick();
     uint32_t previous_time = 0;
@@ -30,13 +33,32 @@ _Noreturn void RunTaskManager(void) {
 
     #endif
     int blink_counter = 0;
+    setColor(255, 127, 127);
+
+
 
     while (1) {
-      //  tickColor();
+        current_time = HAL_GetTick();
+        IComms_PeriodicReceive();
 
-        setGreen(getGreen());
-        setBlue(getBlue());
-        setRed(getRed());
+
+
+
+            // TODO: Actuate Lights based off of state in LightsDriver
+            runBlinkTask(blink);
+            tickColor();
+            //  tickColor();
+            // Check for CAN maessages
+
+
+        if (current_time - previous_time >= 800) {
+            previous_time = current_time;
+            if (blink == Set) {
+                blink = Clear;
+            } else {
+                blink = Set;
+            }
+        }
 
             /*
         blink_counter++;
@@ -53,16 +75,14 @@ _Noreturn void RunTaskManager(void) {
 */
 
 
-        // Check for CAN maessages
-        IComms_PeriodicReceive();
 
-        // TODO: Actuate Lights based off of state in LightsDriver
-        current_time = HAL_GetTick();
 
-        // Code for front lights
-        // If at this point, blink delay == current time.... Then
-        //write on
-        //or write off
+
+
+            // Code for front lights
+            // If at this point, blink delay == current time.... Then
+            //write on
+            //or write off
 
             //setHazards(getHazardsStatus() == Set && blink == Set);
 
@@ -73,8 +93,8 @@ _Noreturn void RunTaskManager(void) {
 
 
 #ifdef BRUCE_REAR_LIGHTS
-        setRunningLights(getBrakeLightsStatus() == Set);
+            setRunningLights(getBrakeLightsStatus() == Set);
 #endif
 
-    }
+        }
 }

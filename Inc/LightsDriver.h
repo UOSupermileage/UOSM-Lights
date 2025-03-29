@@ -19,9 +19,10 @@ flag_status_t getHighBeamLightsStatus();
 flag_status_t getRed();
 flag_status_t getGreen();
 flag_status_t getBlue();
+static lights_status_t lights_status;
 
 //Setters
-void setLightsStatus(uint32_t lights);
+void setLightsStatus(u_int32_t lights);
 void setBrakesStatus(flag_status_t);
 
 //Functions for front lights

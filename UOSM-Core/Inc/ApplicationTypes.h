@@ -16,12 +16,9 @@ extern "C" {
 
 #include "SerialDebugDriver.h"
 
-#define DebugPrint(...) SerialPrintln(__VA_ARGS__) // Disabled to save memory
+#define DebugPrint(...) SerialPrintln(__VA_ARGS__)
 
 #include <stdint.h>
-
-#define PUBLIC
-#define PRIVATE
 
 #define PI_T2 6.28318530718 // Pi * 2
 
@@ -44,17 +41,14 @@ typedef enum {
 } MotorCode;
 
 typedef enum {
-    THROTTLE_TOO_HIGH
-} ErrorCode;
-
-typedef enum {
     DEADMAN,
     EVENT_TIMER,
     MOTOR_INITIALIZING,
     UNDERVOLTAGE,
     DRIVER_ENABLED,
     NEW_LAP,
-    BRAKES_ENABLED
+    BRAKES_ENABLED,
+    THROTTLE_TOO_HIGH
 } EventCode;
 
 typedef enum {
@@ -111,8 +105,7 @@ typedef union {
         uint32_t left_turn_enabled: 1;
         uint32_t right_turn_enabled: 1;
         uint32_t headlights_enabled: 1;
-        uint32_t brakelights_enabled: 1;
-        uint32_t low_beams_enabled: 27;
+        uint32_t low_beams_enabled: 28;
     };
 } lights_status_t;
 

@@ -45,6 +45,6 @@
 //    };
 //} rgb_t;
 
-_Noreturn void RunTaskManager(void);
+_Noreturn void pRunTaskManager(void);
 
 #endif //UOSM_LIGHTS_TASKMANAGER_H

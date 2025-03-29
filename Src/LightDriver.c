@@ -25,6 +25,14 @@ static flag_status_t brakes_status;
 //Global setter
 void setLightsStatus(uint32_t lights){
     lights_status.all = lights;
+
+    if (lights_status.left_turn_enabled) setLeftTurn(lights_status.left_turn_enabled);
+    if (lights_status.right_turn_enabled) setRightTurn(lights_status.right_turn_enabled);
+    if (lights_status.headlights_enabled) setHighBeams(lights_status.headlights_enabled);
+    if (lights_status.low_beams_enabled) setHeadlights(lights_status.low_beams_enabled);
+
+
+
 }
 void setBrakesStatus(flag_status_t status){
     brakes_status = status;
@@ -32,6 +40,7 @@ void setBrakesStatus(flag_status_t status){
 
 //Getters
 flag_status_t getLeftTurnStatus(){
+    return lights_status.left_turn_enabled;
     return HAL_GPIO_ReadPin(FrontLeftTurn_port, FrontLeftTurn_pin) == GPIO_PIN_SET ? Set : Clear;
 }
 
@@ -85,10 +94,10 @@ void setHighBeams(flag_status_t enabled) {
     HAL_GPIO_WritePin(FrontHeadlightsHigh_port, FrontHeadlightsHigh_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
-void setLow(flag_status_t enabled) {
+void setHeadlights(flag_status_t enabled) {
 #ifdef FRONT_LIGHTS
 
-    DebugPrint("Set");
+    DebugPrint("Set %d\n", enabled);
     HAL_GPIO_WritePin(FrontHeadlightsLow_port, FrontHeadlightsLow_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
 #endif
