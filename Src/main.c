@@ -101,7 +101,7 @@ int main(void)
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
 
-    RunTaskManager();
+    runTaskManager();
 
   /* USER CODE END 2 */
 
