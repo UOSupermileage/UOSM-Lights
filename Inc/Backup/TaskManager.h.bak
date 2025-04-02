@@ -8,9 +8,6 @@
 
 #include "ApplicationTypes.h"
 
-
-
-
 //
 //
 //
@@ -45,6 +42,6 @@
 //    };
 //} rgb_t;
 
-_Noreturn void pRunTaskManager(void);
+_Noreturn void runTaskManager(void);
 
 #endif //UOSM_LIGHTS_TASKMANAGER_H

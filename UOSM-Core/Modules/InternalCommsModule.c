@@ -106,6 +106,7 @@ void IComms_PeriodicReceive() {
                 return;
             }
 
+            DebugPrint("CAN ID: %d\n", rxMsg.standardMessageID);
             CANMessageLookUpTable[rxMsg.standardMessageID].canMessageCallback(&rxMsg);
         } else {
             DebugPrint("#ICM: FAILED TO RETRIEVE ICOMMS MESSAGE FROM DRIVER");

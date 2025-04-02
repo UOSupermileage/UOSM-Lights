@@ -12,19 +12,25 @@ void tickColor(void) {
     pwm_count = 0;
   }
 
-    if (pwm_count < Red_Freq) {
+    if (Red_Freq == 0) {
+        GPIO_setRed(Clear);
+    } else if (pwm_count < Red_Freq) {
       GPIO_setRed(Set);
     } else {
       GPIO_setRed(Clear);
     }
 
-  if (pwm_count < Blue_Freq) {
+    if (Blue_Freq == 0) {
+        GPIO_setBlue(Clear);
+    } else if (pwm_count < Blue_Freq) {
     GPIO_setBlue(Set);
   } else {
     GPIO_setBlue(Clear);
   }
 
-  if (pwm_count < Green_Freq) {
+if (Green_Freq == 0) {
+    GPIO_setGreen(Clear);
+} else if (pwm_count < Green_Freq) {
     GPIO_setGreen(Set);
   } else {
     GPIO_setGreen(Clear);

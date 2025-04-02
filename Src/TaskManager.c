@@ -31,19 +31,23 @@ _Noreturn void runTaskManager(void) {
         current_time = HAL_GetTick();
         IComms_PeriodicReceive();
 
-        GPIO_setLeftTurn(getLeftTurnStatus() ? blink : Clear);
-        GPIO_setRightTurn(getRightTurnStatus() ? blink : Clear);
-        GPIO_setHazards(getHazardsStatus() ? blink : Clear);
+        if (getHazardsStatus()) {
+            GPIO_setHazards(blink);
+        } else {
+            GPIO_setLeftTurn(getLeftTurnStatus() ? blink : Clear);
+            GPIO_setRightTurn(getRightTurnStatus() ? blink : Clear);
+        }
 
 #ifdef FRONT_LIGHTS
-        setColor(255, 127, 127);
+        setColor(0, 0, 0);
         tickColor();
-        GPIO_setLowBeams(getHeadlightsStatus());
-        GPIO_setHighBeams(getHighBeamLightsStatus());
+        GPIO_setLowBeams(Clear);
+        GPIO_setHighBeams(blink);
 #endif
 
-#ifdef BRUCE_REAR_LIGHTS
+#ifdef REAR_LIGHTS
         GPIO_setBrakeLights(getBrakeLightsStatus());
+        GPIO_setRunningLights(Set);
 #endif
         // Toggle blink global so that all lights blink in unison
         if (current_time - previous_time >= 800) {
@@ -52,6 +56,21 @@ _Noreturn void runTaskManager(void) {
                 blink = Clear;
             } else {
                 blink = Set;
+            }
+
+            lights_status_t status;
+            status.all = 0;
+            status.left_turn_enabled = blink;
+            iCommsMessage_t lightsTxMsg = IComms_CreateLightsMessage(status);
+            result_t r = IComms_Transmit(&lightsTxMsg);
+            if (r == RESULT_OK) {
+                if (blink) {
+                    DebugPrint("Sent blink on\n");
+                } else {
+                    DebugPrint("Sent blink off\n");
+                }
+            } else {
+                DebugPrint("Failed to send CAN\n");
             }
         }
     }

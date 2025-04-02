@@ -1,11 +1,7 @@
-#include <stdint.h>
 #include "ColorDriver.h"
-#include <LightsDriver.h>
-uint32_t red = 0, green = 0, blue = 0;
+#include "LightsDriver.h"
 uint32_t Red_Freq, Green_Freq, Blue_Freq;
 uint16_t maxFreq = 10;
-
-int goingUpRed = 0;
 
 uint16_t pwm_count = 0;
 
@@ -16,33 +12,34 @@ void tickColor(void) {
     pwm_count = 0;
   }
 
-    if (pwm_count < Red_Freq) {
-      setRed(Set);
+    if (Red_Freq == 0) {
+        GPIO_setRed(Clear);
+    } else if (pwm_count < Red_Freq) {
+      GPIO_setRed(Set);
     } else {
-      setRed(Clear);
+      GPIO_setRed(Clear);
     }
 
-  if (pwm_count < Blue_Freq) {
-    setBlue(Set);
+    if (Blue_Freq == 0) {
+        GPIO_setBlue(Clear);
+    } else if (pwm_count < Blue_Freq) {
+    GPIO_setBlue(Set);
   } else {
-    setBlue(Clear);
+    GPIO_setBlue(Clear);
   }
 
-  if (pwm_count < Green_Freq) {
-    setGreen(Set);
+if (Green_Freq == 0) {
+    GPIO_setGreen(Clear);
+} else if (pwm_count < Green_Freq) {
+    GPIO_setGreen(Set);
   } else {
-    setGreen(Clear);
+    GPIO_setGreen(Clear);
   }
-
-
-    // green++;
-    // red++;
-    // blue++;
 }
+
 //0 -> 255
-void setColor(uint32_t r, uint32_t g, uint32_t b) { //TODO: Fix flickering
+void setColor(uint32_t r, uint32_t g, uint32_t b) {
   if (r > 255 || g > 255 || b > 255) {
-    DebugPrint("nuh uh");
     return;
   }
 
@@ -50,13 +47,9 @@ void setColor(uint32_t r, uint32_t g, uint32_t b) { //TODO: Fix flickering
   int greenPercent = g * maxFreq / 255;
   int bluePercent = b * maxFreq / 255;
 
-
-
-
   setBlueFrequency(bluePercent);
   setRedFrequency(redPercent);
   setGreenFrequency(greenPercent);
-
 }
 
 

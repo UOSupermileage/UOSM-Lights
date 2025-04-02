@@ -54,30 +54,33 @@ flag_status_t getBrakeLightsStatus(){
 ///
 
 void GPIO_setLeftTurn(flag_status_t enabled) {
-    DebugPrint("Left Turn");
     HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
 void GPIO_setHazards(flag_status_t enabled) {
-    DebugPrint("Hazard");
+    if (enabled) {
+        DebugPrint("HE\n");
+    } else {
+        DebugPrint("HO\n");
+    }
+
     HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
     HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
 void GPIO_setRightTurn(flag_status_t enabled) {
-    DebugPrint("Right Turn");
     HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 }
 
 void GPIO_setHighBeams(flag_status_t enabled) {
-    DebugPrint("Highbeams");
-    HAL_GPIO_WritePin(HeadlightsHigh_port, HeadlightsHigh_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
+#ifdef FRONT_LIGHTS
+    HAL_GPIO_WritePin(HeadlightsHigh_port, HeadlightsHigh_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#endif
 }
 
 void GPIO_setLowBeams(flag_status_t enabled) {
 #ifdef FRONT_LIGHTS
-    DebugPrint("Set %d\n", enabled);
-    HAL_GPIO_WritePin(HeadlightsLow_port, HeadlightsLow_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(HeadlightsLow_port, HeadlightsLow_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 #endif
 }
 void GPIO_setRunningLights(flag_status_t enabled){
@@ -87,18 +90,24 @@ void GPIO_setRunningLights(flag_status_t enabled){
 }
 void GPIO_setBrakeLights(flag_status_t enabled){
 #ifdef REAR_LIGHTS
-    HAL_GPIO_WritePin(BrakeLights_port, BrakeLights_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BrakeLights_port, BrakeLights_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #endif
 }
 
 void GPIO_setRed(flag_status_t red) {
+#ifdef FRONT_LIGHTS
     HAL_GPIO_WritePin(R_port, R_pin, red ? GPIO_PIN_RESET : GPIO_PIN_SET);
+#endif
 }
 
 void GPIO_setGreen(flag_status_t green) {
+#ifdef FRONT_LIGHTS
     HAL_GPIO_WritePin(G_port, G_pin, green ? GPIO_PIN_RESET : GPIO_PIN_SET);
+#endif
 }
 
 void GPIO_setBlue(flag_status_t blue) {
+#ifdef FRONT_LIGHTS
     HAL_GPIO_WritePin(B_port, B_pin, blue ? GPIO_PIN_RESET : GPIO_PIN_SET);
+#endif
 }
