@@ -30,16 +30,22 @@ _Noreturn void RunTaskManager(void) {
         current_time = HAL_GetTick();
 
         // Code for front lights
-        setLeftTurn(getLeftTurnStatus() == Set && blink == Set);
-        setRightTurn(getRightTurnStatus() == Set && blink == Set);
-        setHazards(getHazardsStatus() == Set && blink == Set);
+        if (getHazardsStatus() == Set) {
+            setHazards(blink == Set);
+        } else {
+            setLeftTurn(getLeftTurnStatus() == Set && blink == Set);
+            setRightTurn(getRightTurnStatus() == Set && blink == Set);
+        }
 
 #ifdef BRUCE_FRONT_LIGHTS
         setHeadlights(getHeadlightsStatus() == Set);
 #endif
 #ifdef BRUCE_REAR_LIGHTS
-        setRunningLights(getBrakeLightsStatus() == Set);
+        setBrakesStatus(getBrakeLightsStatus() == Set);
 #endif
+
+        setRunningLights();
+        setBrakeLights();
 
         //Update blink flag
         if (current_time - previous_time >= blink_delay) {

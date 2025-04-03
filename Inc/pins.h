@@ -6,7 +6,7 @@
 #define UOSM_LIGHTS_PINS_H
 //#define FRONT_LIGHTS
 #define BRUCE_FRONT_LIGHTS
-//#define BRUCE_REAR_LIGHTS
+// #define BRUCE_REAR_LIGHTS
 #ifdef FRONT_LIGHTS
 #define RunningLightsR_port GPIOA
 #define RunningLightsR_pin GPIO_PIN_2

@@ -44,7 +44,8 @@ flag_status_t getHazardsStatus(){
     return lights_status.hazards_enabled;
 }
 flag_status_t getBrakeLightsStatus(){
-    return brakes_status;
+    // return brakes_status;
+    return HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) == GPIO_PIN_SET ? Set : Clear;
 }
 
 //Abstract functions over HAL
@@ -69,11 +70,19 @@ void setHeadlights(flag_status_t enabled) {
 }
 void RunningLightsEnabled(flag_status_t enabled){
 #ifdef BRUCE_REAR_LIGHTS
-    HAL_GPIO_WritePin(RunningLights_port, RunningLights_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(RunningLights_port, RunningLights_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #endif
 }
 void BrakeLightsEnabled(flag_status_t enabled){
 #ifdef BRUCE_REAR_LIGHTS
-    HAL_GPIO_WritePin(BrakeLights_port, BrakeLights_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BrakeLights_port, BrakeLights_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #endif
+}
+
+void setRunningLights() {
+    RunningLightsEnabled(lights_status.low_beams_enabled);
+}
+
+void setBrakeLights() {
+    BrakeLightsEnabled(brakes_status);
 }
