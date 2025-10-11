@@ -23,6 +23,19 @@ void LightsDataCallback(iCommsMessage_t *msg){
     if (getHazardsStatus()) {
         DebugPrint("Hazards CAN\n");
     }
+
+    if (getBrakeLightsStatus()) {
+        DebugPrint("Brake Lights CAN \n");
+    }
+
+    if (getHighBeamsStatus()) {
+        DebugPrint("High Beams CAN \n");
+    }
+
+    if (getLowBeamsStatus()) {
+        DebugPrint("Low Beams CAN \n");
+    }
+
 }
 
 void EventDataCallback(iCommsMessage_t *msg) {

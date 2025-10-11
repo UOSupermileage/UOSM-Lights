@@ -37,8 +37,12 @@ flag_status_t getLeftTurnStatus(){
 flag_status_t getRightTurnStatus(){
     return lights_status.right_turn_enabled;
 }
-flag_status_t getHeadlightsStatus(){
+
+flag_status_t getHighBeamsStatus() {
     return lights_status.headlights_enabled;
+}
+flag_status_t getLowBeamsStatus() {
+    return lights_status.low_beams_enabled;
 }
 flag_status_t getHazardsStatus(){
     return lights_status.hazards_enabled;
@@ -66,6 +70,16 @@ void setHeadlights(flag_status_t enabled) {
 #ifdef BRUCE_FRONT_LIGHTS
     HAL_GPIO_WritePin(Headlights1_port, Headlights1_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
     HAL_GPIO_WritePin(Headlights2_port, Headlights2_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#endif
+}
+void setHighBeams(flag_status_t enabled) {
+#ifdef FRONT_LIGHTS
+    HAL_GPIO_WritePin(HeadlightsHigh_port, HeadlightsHigh_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#endif
+}
+void setLowBeams(flag_status_t enabled) {
+#ifdef FRONT_LIGHTS
+    HAL_GPIO_WritePin(HeadlightsLow_port, HeadlightsLow_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 #endif
 }
 void RunningLightsEnabled(flag_status_t enabled){
