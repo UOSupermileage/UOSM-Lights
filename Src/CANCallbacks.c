@@ -5,6 +5,7 @@
 #include "LightsDriver.h"
 
 void LightsDataCallback(iCommsMessage_t *msg){
+    DebugPrint("Lights CAN Message Received\n");
     uint32_t message = 0;
     message |= (uint32_t) msg->data[0] << 24;
     message |= (uint32_t) msg->data[1] << 16;
@@ -39,6 +40,7 @@ void LightsDataCallback(iCommsMessage_t *msg){
 }
 
 void EventDataCallback(iCommsMessage_t *msg) {
+    DebugPrint("Event CAN Message Received\n");
     // if (msg->dataLength == CANMessageLookUpTable[EVENT_DATA_ID].numberOfBytes) {
     //     EventCode code = msg->data[1];
     //     flag_status_t status = msg->data[0];

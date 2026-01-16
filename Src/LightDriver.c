@@ -54,6 +54,9 @@ flag_status_t getBrakeLightsStatus(){
 
 //Abstract functions over HAL
 void setLeftTurn(flag_status_t enabled) {
+#ifdef REAR_LIGHTS
+    enabled = !enabled;
+    #endif
     HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
@@ -63,6 +66,9 @@ void setHazards(flag_status_t enabled) {
 }
 
 void setRightTurn(flag_status_t enabled) {
+#ifdef REAR_LIGHTS
+    enabled = !enabled;
+#endif
     HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
@@ -83,7 +89,7 @@ void setLowBeams(flag_status_t enabled) {
 #endif
 }
 void RunningLightsEnabled(flag_status_t enabled){
-#ifdef BRUCE_REAR_LIGHTS
+#if defined(BRUCE_REAR_LIGHTS)
     HAL_GPIO_WritePin(RunningLights_port, RunningLights_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #endif
 }
