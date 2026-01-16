@@ -45,11 +45,12 @@
 #define RightTurn_port GPIOA
 #define RightTurn_pin GPIO_PIN_2
 #endif
-#endif //UOSM_LIGHTS_  PINS_H
-//RunningLightsR PA2
-//RunningLightsR PA2
-//HeadlightsLow PA13 - low beams
-//HeadlightsHigh PA14 - high beams
-//LeftTurn PA0
-//TODO: Assign correct lights pins
+#endif
+// UOSM_LIGHTS_  PINS_H
+// RunningLightsR PA2
+// RunningLightsG PA3
+// HeadlightsLow PA13 - low beams
+// HeadlightsHigh PA14 - high beams
+// LeftTurn PA0
+// TODO: Assign correct lights pins
 //
