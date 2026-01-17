@@ -92,6 +92,12 @@ void RunningLightsEnabled(flag_status_t enabled){
 #if defined(BRUCE_REAR_LIGHTS)
     HAL_GPIO_WritePin(RunningLights_port, RunningLights_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #endif
+#ifdef FRONT_LIGHTS
+    HAL_GPIO_WritePin(RunningLightsR_port, RunningLightsR_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RunningLightsG_port, RunningLightsG_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
+    HAL_GPIO_WritePin(RunningLightsB_port, RunningLightsB_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
+#endif
+
 }
 void BrakeLightsEnabled(flag_status_t enabled){
 #ifdef BRUCE_REAR_LIGHTS
