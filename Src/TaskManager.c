@@ -37,12 +37,8 @@ _Noreturn void RunTaskManager(void) {
             setRightTurn(getRightTurnStatus() == Set && blink == Set);
         }
 
-#ifdef BRUCE_FRONT_LIGHTS
-        setHeadlights(getHeadlightsStatus() == Set);
-#endif
-#ifdef BRUCE_REAR_LIGHTS
-        setBrakesStatus(getBrakeLightsStatus() == Set);
-#endif
+        setHighBeams(getHighBeamsStatus() == Set);
+        setLowBeams(getLowBeamsStatus() == Set);
 
         setRunningLights();
         setBrakeLights();

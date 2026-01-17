@@ -15,6 +15,8 @@ flag_status_t getRightTurnStatus();
 flag_status_t getHazardsStatus();
 flag_status_t getHeadlightsStatus();
 flag_status_t getBrakeLightsStatus();
+flag_status_t getHighBeamsStatus();
+flag_status_t getLowBeamsStatus();
 
 //Setters
 void setLightsStatus(uint32_t lights);
@@ -25,6 +27,8 @@ void setLeftTurn(flag_status_t enabled);
 void setRightTurn(flag_status_t enabled);
 void setHazards(flag_status_t enabled);
 void setHeadlights(flag_status_t enabled);
+void setHighBeams(flag_status_t enabled);
+void setLowBeams(flag_status_t enabled);
 
 //Functions for brake lights
 void setRunningLights();
