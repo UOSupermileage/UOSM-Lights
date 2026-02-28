@@ -37,8 +37,12 @@ flag_status_t getLeftTurnStatus(){
 flag_status_t getRightTurnStatus(){
     return lights_status.right_turn_enabled;
 }
-flag_status_t getHeadlightsStatus(){
+
+flag_status_t getHighBeamsStatus() {
     return lights_status.headlights_enabled;
+}
+flag_status_t getLowBeamsStatus() {
+    return lights_status.low_beams_enabled;
 }
 flag_status_t getHazardsStatus(){
     return lights_status.hazards_enabled;
@@ -50,6 +54,9 @@ flag_status_t getBrakeLightsStatus(){
 
 //Abstract functions over HAL
 void setLeftTurn(flag_status_t enabled) {
+#ifdef REAR_LIGHTS
+    enabled = !enabled;
+    #endif
     HAL_GPIO_WritePin(LeftTurn_port, LeftTurn_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
@@ -59,6 +66,9 @@ void setHazards(flag_status_t enabled) {
 }
 
 void setRightTurn(flag_status_t enabled) {
+#ifdef REAR_LIGHTS
+    enabled = !enabled;
+#endif
     HAL_GPIO_WritePin(RightTurn_port, RightTurn_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
@@ -68,8 +78,18 @@ void setHeadlights(flag_status_t enabled) {
     HAL_GPIO_WritePin(Headlights2_port, Headlights2_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
 #endif
 }
+void setHighBeams(flag_status_t enabled) {
+#ifdef FRONT_LIGHTS
+    HAL_GPIO_WritePin(HeadlightsHigh_port, HeadlightsHigh_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#endif
+}
+void setLowBeams(flag_status_t enabled) {
+#ifdef FRONT_LIGHTS
+    HAL_GPIO_WritePin(HeadlightsLow_port, HeadlightsLow_pin, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#endif
+}
 void RunningLightsEnabled(flag_status_t enabled){
-#ifdef BRUCE_REAR_LIGHTS
+#if defined(BRUCE_REAR_LIGHTS)
     HAL_GPIO_WritePin(RunningLights_port, RunningLights_pin, enabled ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #endif
 }
